@@ -1,5 +1,3 @@
-package source;
-
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -7,7 +5,7 @@ import java.util.regex.Pattern;
 public class Kiemtra {
 	static Scanner sc = new Scanner(System.in);
 
-	public boolean check_sdt(String phone) {
+	public static boolean check_sdt(String phone) {
 		String reg = "^0\\d{9}$";
 		Pattern pattern = Pattern.compile(reg);
 		Matcher matcher = pattern.matcher(phone);
@@ -18,7 +16,7 @@ public class Kiemtra {
 		return true;
 	}
 
-	public boolean check_maso(String maso) {
+	public static boolean check_maso(String maso) {
 		String reg = "^[A-Za-z0-9]{2}\\d{8}$";
 		Pattern pattern = Pattern.compile(reg);
 		Matcher matcher = pattern.matcher(maso);
@@ -29,15 +27,18 @@ public class Kiemtra {
 		return true;
 	}
 
-	public boolean check_diachi(String text) {
-		if (text == null || text == "") {
-			System.out.println("Khong duoc bo trong!!!");
+	public static boolean check_diachi(String text) {
+		String reg = "[^\\s*]$";
+		Pattern pattern = Pattern.compile(reg);
+		Matcher matcher = pattern.matcher(text);
+		if (!matcher.matches()) {
+			System.out.println("Chuoi khong duoc bo trong!!!");
 			return false;
 		}
 		return true;
 	}
 
-	public boolean check_date(String date) {
+	public static boolean check_date(String date) {
 		String reg = "^(0[1-9]|[1-2][0-9]|3[01])/(0[1-9]|1[0-2])/[1-2]\\d{3}$";
 		Pattern pattern = Pattern.compile(reg);
 		Matcher matcher = pattern.matcher(date);
@@ -48,7 +49,7 @@ public class Kiemtra {
 		return true;
 	}
 
-	public boolean check_name(String name) {
+	public static boolean check_name(String name) {
 		String reg = "[A-Za-z]+$";
 		Pattern pattern = Pattern.compile(reg);
 		Matcher matcher = pattern.matcher(name);
@@ -59,9 +60,9 @@ public class Kiemtra {
 		return true;
 	}
 
-	public boolean check_sex(String sex) {
-		String reg = "nam|nu|Nam|Nu$";
-		Pattern pattern = Pattern.compile(reg);
+	public static boolean check_sex(String sex) {
+		String reg = "nam|nu$";
+		Pattern pattern = Pattern.compile(reg,Pattern.CASE_INSENSITIVE);
 		Matcher matcher = pattern.matcher(sex);
 		if (!matcher.matches() || sex == "") {
 			System.out.println("Gioi tinh phai la nam/nu");
@@ -70,8 +71,8 @@ public class Kiemtra {
 		return true;
 	}
 
-	public boolean check_mail(String mail) {
-		String reg = "^[a-zA-Z][A-Za-z0-9]{5,32}@[a-zA-Z]{2,10}(\\.[a-zA-Z]{2,10})+$";
+	public static boolean check_mail(String mail) {
+		String reg = "^[A-Za-z0-9]{5,32}@[a-zA-Z]{2,10}(\\.[a-zA-Z]{2,10})+$";
 		Pattern pattern = Pattern.compile(reg);
 		Matcher matcher = pattern.matcher(mail);
 		if (!matcher.matches() || mail == "") {
@@ -81,17 +82,31 @@ public class Kiemtra {
 		return true;
 	}
 
+	public static boolean check_cccd(String cccd)
+	{
+		String reg = "^\\d{12}$";
+		Pattern pattern = Pattern.compile(reg);
+		Matcher matcher = pattern.matcher(cccd);
+		if(!matcher.matches() || cccd == "")
+		{
+			System.out.println("So can cuoc cong dan khong dung!");
+			return false;
+		}
+		return true;
+	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		// Kiemtra num = new Kiemtra();
+		Kiemtra num = new Kiemtra();
 		// System.out.println("Nhap chuoi:");
 		// String tmp = sc.nextLine();
 		// num.check_sdt("0123456789");
 		// num.check_maso("AB22560064");
-		// num.check_date("29/10/2004");
+		//num.check_date("32/10/2004");
 		// num.check_name("sang");
-		// num.check_sex("Nu");
-		// num.check_mail("sangtrinhcao7@gmail.com");
+		// num.check_sex("nam");
+		//num.check_mail("sangtrinhcao7@gmail.com");
+		//num.check_cccd("094203013509");
+		//num.check_diachi("");
 		sc.close();
 	}
 
